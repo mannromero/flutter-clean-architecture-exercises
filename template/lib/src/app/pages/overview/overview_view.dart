@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:template/src/app/pages/overview/overview_controller.dart';
+import 'package:template/src/data/data_user_repository.dart';
 
 class OverviewPage extends View {
   static const route = '/overview';
@@ -11,7 +12,7 @@ class OverviewPage extends View {
 }
 
 class OverviewPageState extends ViewState<OverviewPage, OverviewController> {
-  OverviewPageState() : super(OverviewController());
+  OverviewPageState() : super(OverviewController(DataUserRepository()));
 
   @override
   Widget get view {
