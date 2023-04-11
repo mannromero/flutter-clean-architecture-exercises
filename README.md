@@ -1,7 +1,7 @@
 Flutter Clean Architecture Exercises
 ==================================
 
-Objective: To be able to make a simple todo app implemented with *modified* `Clean Architecture` in `React`
+Objective: To be able to make a simple todo app implemented with *modified* `Clean Architecture` in `Flutter/Dart`
 
 - [Exercise 1](https://github.com/kahero-team/flutter-clean-architecture-exercises/tree/main/exercise-1)
 - [Exercise 2](https://github.com/kahero-team/flutter-clean-architecture-exercises/tree/main/exercise-2)
