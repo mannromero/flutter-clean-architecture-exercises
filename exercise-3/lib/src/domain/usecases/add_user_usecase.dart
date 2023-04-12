@@ -7,7 +7,7 @@ import 'package:template/src/domain/repositories/user_repository.dart';
 class GetUsersUseCase extends UseCase<User, Map> {
   GetUsersUseCase(this._userRepository);
   final UserRepository _userRepository;
-  @override
+  @override //
   Future<Stream<User>> buildUseCaseStream(Map? params) async {
     final controller = StreamController<User>();
     try {
