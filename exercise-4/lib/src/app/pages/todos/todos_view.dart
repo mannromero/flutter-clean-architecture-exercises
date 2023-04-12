@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:template/src/app/pages/todos/todos_controller.dart';
+import 'package:template/src/data/data_todo_repository.dart';
 
 class TodosPage extends View {
   static const route = '/todos';
@@ -11,7 +12,7 @@ class TodosPage extends View {
 }
 
 class TodosPageState extends ViewState<TodosPage, TodosController> {
-  TodosPageState() : super(TodosController());
+  TodosPageState() : super(TodosController(DataTodoRepository()));
 
   final List<String> todos = ['Task 1', 'Task 2', 'Task 3'];
 

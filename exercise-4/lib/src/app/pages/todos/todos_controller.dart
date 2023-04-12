@@ -2,8 +2,8 @@ import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:template/src/app/pages/todos/todos_presenter.dart';
 
 class TodosController extends Controller {
-  TodosController()
-      : presenter = TodosPresenter(),
+  TodosController(todoRepo)
+      : presenter = TodosPresenter(todoRepo),
         super();
 
   final TodosPresenter presenter;
