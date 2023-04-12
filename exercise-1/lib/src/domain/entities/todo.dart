@@ -1,5 +1,5 @@
 class Todo {
-  const Todo(this.id, this.title);
-  final String id;
+  const Todo({required this.id, required this.title});
+  final dynamic id;
   final String title;
 }
