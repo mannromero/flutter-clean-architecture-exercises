@@ -9,8 +9,8 @@ class AppRouter {
     switch (routeSettings.name) {
       case OverviewPage.route:
         return _buildRoute(false, routeSettings, const OverviewPage());
-      // case TodosPage.route:
-      //   return _buildRoute(false, routeSettings, const TodosPage());
+      case TodosPage.route:
+        return _buildRoute(false, routeSettings, const TodosPage());
       default:
         return null;
     }
