@@ -21,6 +21,26 @@ class TodosPresenter extends Presenter {
   final RemoveTodoUseCase removeTodoUseCase;
   final AddTodoUseCase addTodoUseCase;
 
+  Function? getAllTodosOnNext;
+  Function? getAllTodosOnComplete;
+  Function? getAllTodosOnError;
+
+  Function? getTodoOnNext;
+  Function? getTodoOnComplete;
+  Function? getTodoOnError;
+
+  Function? updateTodoOnNext;
+  Function? updateTodoOnComplete;
+  Function? updateTodoOnError;
+
+  Function? removeTodoOnNext;
+  Function? removeTodoOnComplete;
+  Function? removeTodoOnError;
+
+  Function? addTodoOnNext;
+  Function? addTodoOnComplete;
+  Function? addTodoOnError;
+
   void getAllTodos() {
     getAllTodosUseCase.execute(GetAllTodosObserver(this), null);
   }
