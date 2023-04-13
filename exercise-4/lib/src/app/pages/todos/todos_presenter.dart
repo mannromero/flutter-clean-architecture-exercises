@@ -22,27 +22,33 @@ class TodosPresenter extends Presenter {
   final AddTodoUseCase addTodoUseCase;
 
   void getAllTodos() {
-    getAllTodosUseCase.execute(GetAllTodosObserver(this));
+    getAllTodosUseCase.execute(GetAllTodosObserver(this), null);
   }
 
   void getTodo() {
-    getTodoUseCase.execute(GetTodoObserver(this));
+    getTodoUseCase.execute(GetTodoObserver(this), null);
   }
 
   void updateTodo() {
-    updateTodoUseCase.execute(UpdateTodoObserver(this));
+    updateTodoUseCase.execute(UpdateTodoObserver(this), null);
   }
 
   void removeTodo() {
-    removeTodoUseCase.execute(RemoveTodoObserver(this));
+    removeTodoUseCase.execute(RemoveTodoObserver(this), null);
   }
 
   void addTodo() {
-    addTodoUseCase.execute(AddTodoObserver(this));
+    addTodoUseCase.execute(AddTodoObserver(this), null);
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    getAllTodosUseCase.dispose();
+    getTodoUseCase.dispose();
+    updateTodoUseCase.dispose();
+    removeTodoUseCase.dispose();
+    addTodoUseCase.dispose();
+  }
 }
 
 class GetAllTodosObserver extends Observer<List<Todo>> {
