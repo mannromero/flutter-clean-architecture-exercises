@@ -1,0 +1,40 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "exercise-5",
+            "cwd": "exercise-5",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "exercise-5 (profile mode)",
+            "cwd": "exercise-5",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "exercise-5 (release mode)",
+            "cwd": "exercise-5",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "Flutter (Chrome)",
+            "program": "lib/main.dart",
+            "cwd": "exercise-5",
+            "deviceId": "chrome",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "Flutter",
+            "program": "lib/main.dart",
+            "cwd": "exercise-1",
+            "request": "launch",
+            "type": "dart"
+        }
+    ]
+}

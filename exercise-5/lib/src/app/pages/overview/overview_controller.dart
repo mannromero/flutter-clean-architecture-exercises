@@ -1,6 +1,8 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:template/src/app/pages/overview/overview_presenter.dart';
 import 'package:template/src/domain/entities/user.dart';
+import 'package:template/src/app/pages/todos/todos_view.dart';
+import 'package:flutter/material.dart';
 
 class OverviewController extends Controller {
   OverviewController(usersRepo)
@@ -33,7 +35,7 @@ class OverviewController extends Controller {
   void onDeactivated() => print('View is about to be deactivated');
 
   void handleTodo() {
-    // Navigator.of(getContext()).pushReplacementNamed(TodosPage.route);
+    Navigator.of(getContext()).pushReplacementNamed(TodosPage.route);
   }
 
   @override

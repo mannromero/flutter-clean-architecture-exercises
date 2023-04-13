@@ -20,14 +20,14 @@ class OverviewPageState extends ViewState<OverviewPage, OverviewController> {
       key: globalKey,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Overview'),
+        title: const Text('Overview Page'),
       ),
       body: Center(
         child: ControlledWidgetBuilder<OverviewController>(
           builder: (context, controller) {
             return ElevatedButton(
               onPressed: controller.handleTodo,
-              child: const Text('Navigate to Todo'),
+              child: const Text('Navigate to You'),
             );
           },
         ),
