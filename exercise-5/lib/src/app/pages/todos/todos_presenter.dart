@@ -5,7 +5,6 @@ import 'package:template/src/domain/usecases/todos/get_todo_usecase.dart';
 import 'package:template/src/domain/usecases/todos/update_todo_usecase.dart';
 import 'package:template/src/domain/usecases/todos/remove_todo_usecase.dart';
 import 'package:template/src/domain/usecases/todos/add_todo_usecase.dart';
-import 'package:template/src/domain/repositories/todo_repository.dart';
 
 class TodosPresenter extends Presenter {
   TodosPresenter(todoRepo)
@@ -53,8 +52,8 @@ class TodosPresenter extends Presenter {
     updateTodoUseCase.execute(UpdateTodoObserver(this), null);
   }
 
-  void removeTodo() {
-    removeTodoUseCase.execute(RemoveTodoObserver(this), null);
+  void removeTodo(dynamic id) {
+    removeTodoUseCase.execute(RemoveTodoObserver(this), id);
   }
 
   void addTodo() {
@@ -83,7 +82,9 @@ class GetAllTodosObserver extends Observer<List<Todo>> {
   void onError(e) {}
 
   @override
-  void onNext(response) {}
+  void onNext(response) {
+    presenter.getAllTodosOnNext!(response);
+  }
 }
 
 class GetTodoObserver extends Observer<Todo> {
@@ -116,19 +117,25 @@ class UpdateTodoObserver extends Observer<Todo> {
   void onNext(response) {}
 }
 
-class RemoveTodoObserver extends Observer<Todo> {
+class RemoveTodoObserver extends Observer<void> {
   RemoveTodoObserver(this.presenter);
 
   final TodosPresenter presenter;
 
   @override
-  void onComplete() {}
+  void onComplete() {
+    presenter.removeTodoOnComplete!();
+  }
 
   @override
-  void onError(e) {}
+  void onError(e) {
+    presenter.removeTodoOnError!(e);
+  }
 
   @override
-  void onNext(response) {}
+  void onNext(response) {
+    presenter.removeTodoOnNext!(response);
+  }
 }
 
 class AddTodoObserver extends Observer<Todo> {

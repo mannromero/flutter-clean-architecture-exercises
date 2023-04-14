@@ -7,7 +7,24 @@ class DataTodoRepository extends TodoRepository {
       DataTodoRepository._internal(); // singleton
   factory DataTodoRepository() => _instance; // factory constructor
 
-  List<Todo> _todos = [];
+  final List<Todo> _todos = [
+    const Todo(
+      id: 1,
+      title: 'Todo 1',
+    ),
+    const Todo(
+      id: 2,
+      title: 'Todo 2',
+    ),
+    const Todo(
+      id: 3,
+      title: 'Todo 3',
+    ),
+    const Todo(
+      id: 4,
+      title: 'Todo 4',
+    ),
+  ];
 
   @override
   Future<Todo> addTodo(Todo todo) {
@@ -17,7 +34,11 @@ class DataTodoRepository extends TodoRepository {
 
   @override
   Future<void> removeTodo(dynamic id) {
-    _todos.removeWhere((todo) => todo.id == id);
+    final index = _todos.indexWhere((todo) => todo.id == id);
+    if (index == -1) {
+      throw Exception('Todo not found with id $id');
+    }
+    _todos.removeAt(index);
     return Future.value();
   }
 

@@ -11,7 +11,7 @@ class RemoveTodoUseCase extends CompletableUseCase<dynamic> {
     final StreamController<void> controller = StreamController();
     try {
       controller.add(await _todoRepository.removeTodo(params));
-      controller.close();
+      unawaited(controller.close());
     } catch (e) {
       controller.addError(e);
     }

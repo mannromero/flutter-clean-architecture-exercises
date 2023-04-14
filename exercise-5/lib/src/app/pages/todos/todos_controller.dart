@@ -5,15 +5,19 @@ import 'package:template/src/domain/entities/todo.dart';
 class TodosController extends Controller {
   TodosController(todoRepo)
       : presenter = TodosPresenter(todoRepo),
-        super();
+        super() {
+    fetchTodos(); // fetch todos on initialization
+  }
 
   final TodosPresenter presenter;
+  List<Todo> _todos = [];
+  List<Todo> get todos => _todos;
 
   @override
-  // this is called automatically by the parent class
   void initListeners() {
     presenter.getAllTodosOnNext = (List<Todo> todos) {
-      print('Todos are here');
+      _todos = todos;
+      refreshUI();
     };
     presenter.getAllTodosOnComplete = () {
       print('Todos retrieved');
@@ -22,28 +26,8 @@ class TodosController extends Controller {
       print('Todos error');
     };
 
-    presenter.getTodoOnNext = (Todo todo) {
-      print('Todo is here');
-    };
-    presenter.getTodoOnComplete = () {
-      print('Todo retrieved');
-    };
-    presenter.getTodoOnError = (e) {
-      print('Todo error');
-    };
-
-    presenter.updateTodoOnNext = (Todo todo) {
-      print('Todo is updated');
-    };
-    presenter.updateTodoOnComplete = () {
-      print('Todo updated');
-    };
-    presenter.updateTodoOnError = (e) {
-      print('Todo update error');
-    };
-
-    presenter.removeTodoOnNext = (Todo todo) {
-      print('Todo is removed');
+    presenter.removeTodoOnNext = (responce) {
+      fetchTodos();
     };
     presenter.removeTodoOnComplete = () {
       print('Todo removed');
@@ -51,16 +35,14 @@ class TodosController extends Controller {
     presenter.removeTodoOnError = (e) {
       print('Todo remove error');
     };
+  }
 
-    presenter.addTodoOnNext = (Todo todo) {
-      print('Todo is added');
-    };
-    presenter.addTodoOnComplete = () {
-      print('Todo added');
-    };
-    presenter.addTodoOnError = (e) {
-      print('Todo add error');
-    };
+  void fetchTodos() {
+    presenter.getAllTodos();
+  }
+
+  void removeTodoById(dynamic id) {
+    presenter.removeTodo(id);
   }
 
   @override
@@ -70,11 +52,14 @@ class TodosController extends Controller {
   void onReassembled() => print('View is about to be reassembled');
 
   @override
-  void onDeactivated() => print('View is about to be deactivated');
+  void onDeactivated() {
+    presenter.dispose(); // Dispose of the presenter
+    print('View is about to be deactivated');
+  }
 
   @override
   void onDisposed() {
-    presenter.dispose(); // don't forget to dispose of the presenter
+    presenter.dispose();
     super.onDisposed();
   }
 }

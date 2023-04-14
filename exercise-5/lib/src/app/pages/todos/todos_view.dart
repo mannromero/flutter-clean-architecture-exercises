@@ -14,37 +14,39 @@ class TodosPage extends View {
 class TodosPageState extends ViewState<TodosPage, TodosController> {
   TodosPageState() : super(TodosController(DataTodoRepository()));
 
-  final List<String> todos = ['Task 1', 'Task 2', 'Task 3'];
-
   @override
   Widget get view {
-    return Scaffold(
-      key: globalKey,
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Todos'),
-      ),
-      body: ListView.builder(
-        itemCount: todos.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            title: Text(todos[index]),
-            onTap: () {
-              // TODO: Navigate to edit screen
+    return ControlledWidgetBuilder<TodosController>(
+      builder: (context, controller) {
+        return Scaffold(
+          key: globalKey,
+          appBar: AppBar(
+            centerTitle: true,
+            title: const Text('Todos'),
+          ),
+          body: ListView.builder(
+            itemCount: controller.todos.length,
+            itemBuilder: (BuildContext context, int index) {
+              final todo = controller.todos[index];
+              return ListTile(
+                title: Text(todo.title),
+                trailing: IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: () {
+                    controller.removeTodoById(todo.id);
+                  },
+                ),
+              );
             },
-            trailing: IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: () {},
-            ),
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // TODO: Navigate to add screen
-        },
-        child: Icon(Icons.add),
-      ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              // TODO: Navigate to add screen
+            },
+            child: Icon(Icons.add),
+          ),
+        );
+      },
     );
   }
 }
