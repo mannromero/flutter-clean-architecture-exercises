@@ -41,7 +41,34 @@ class TodosPageState extends ViewState<TodosPage, TodosController> {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              // TODO: Navigate to add screen
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Add Todo'),
+                    content: TextField(
+                      controller: controller.newTodoTitleController,
+                      decoration: const InputDecoration(
+                        hintText: 'Enter todo title',
+                      ),
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        child: const Text('Cancel'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      TextButton(
+                        child: const Text('Add'),
+                        onPressed: () {
+                          controller.addTodo();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
             },
             child: Icon(Icons.add),
           ),

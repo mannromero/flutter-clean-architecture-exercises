@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:template/src/app/pages/todos/todos_presenter.dart';
 import 'package:template/src/domain/entities/todo.dart';
@@ -12,6 +13,8 @@ class TodosController extends Controller {
   final TodosPresenter presenter;
   List<Todo> _todos = [];
   List<Todo> get todos => _todos;
+  final TextEditingController _newTodoTitleController = TextEditingController();
+  TextEditingController get newTodoTitleController => _newTodoTitleController;
 
   @override
   void initListeners() {
@@ -35,6 +38,16 @@ class TodosController extends Controller {
     presenter.removeTodoOnError = (e) {
       print('Todo remove error');
     };
+
+    presenter.addTodoOnNext = (responce) {
+      fetchTodos();
+    };
+    presenter.addTodoOnComplete = () {
+      print('Todo added');
+    };
+    presenter.addTodoOnError = (e) {
+      print('Todo add error');
+    };
   }
 
   void fetchTodos() {
@@ -43,6 +56,13 @@ class TodosController extends Controller {
 
   void removeTodoById(dynamic id) {
     presenter.removeTodo(id);
+  }
+
+  void addTodo() {
+    presenter.addTodo({
+      'todo': Todo(title: _newTodoTitleController.text, id: todos.length + 1)
+    });
+    _newTodoTitleController.clear();
   }
 
   @override

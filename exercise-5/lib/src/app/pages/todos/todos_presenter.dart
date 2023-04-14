@@ -56,8 +56,8 @@ class TodosPresenter extends Presenter {
     removeTodoUseCase.execute(RemoveTodoObserver(this), id);
   }
 
-  void addTodo() {
-    addTodoUseCase.execute(AddTodoObserver(this), null);
+  void addTodo(Map params) {
+    addTodoUseCase.execute(AddTodoObserver(this), params);
   }
 
   @override
@@ -144,11 +144,17 @@ class AddTodoObserver extends Observer<Todo> {
   final TodosPresenter presenter;
 
   @override
-  void onComplete() {}
+  void onComplete() {
+    presenter.addTodoOnComplete!();
+  }
 
   @override
-  void onError(e) {}
+  void onError(e) {
+    presenter.addTodoOnError!(e);
+  }
 
   @override
-  void onNext(response) {}
+  void onNext(response) {
+    presenter.addTodoOnNext!(response);
+  }
 }
