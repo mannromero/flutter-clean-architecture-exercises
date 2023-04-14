@@ -70,46 +70,50 @@ class TodosPageState extends ViewState<TodosPage, TodosController> {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('Add Todo'),
-                    content: Form(
-                      autovalidateMode: AutovalidateMode.always,
-                      child: TextFormField(
-                        controller: controller.newTodoTitleController,
-                        decoration: InputDecoration(
-                          hintText: 'Enter todo title',
-                          errorText:
-                              showError ? 'Todo title cannot be empty.' : null,
+                  return StatefulBuilder(builder: (context, setState) {
+                    // <--- StatefulBuilder NOTED
+                    return AlertDialog(
+                      title: const Text('Add Todo'),
+                      content: Form(
+                        autovalidateMode: AutovalidateMode.always,
+                        child: TextFormField(
+                          controller: controller.newTodoTitleController,
+                          decoration: InputDecoration(
+                            hintText: 'Enter todo title',
+                            errorText: showError
+                                ? 'Todo title cannot be empty.'
+                                : null,
+                          ),
                         ),
                       ),
-                    ),
-                    actions: <Widget>[
-                      TextButton(
-                        child: const Text('Cancel'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      TextButton(
-                        child: const Text('Add'),
-                        onPressed: () {
-                          if (controller.newTodoTitleController.text
-                              .trim()
-                              .isEmpty) {
-                            setState(() {
-                              showError = true;
-                            });
-                          } else {
-                            controller.addTodo();
-                            setState(() {
-                              showError = false;
-                            });
+                      actions: <Widget>[
+                        TextButton(
+                          child: const Text('Cancel'),
+                          onPressed: () {
                             Navigator.of(context).pop();
-                          }
-                        },
-                      ),
-                    ],
-                  );
+                          },
+                        ),
+                        TextButton(
+                          child: const Text('Add'),
+                          onPressed: () {
+                            if (controller.newTodoTitleController.text
+                                .trim()
+                                .isEmpty) {
+                              setState(() {
+                                showError = true;
+                              });
+                            } else {
+                              controller.addTodo();
+                              setState(() {
+                                showError = false;
+                              });
+                              Navigator.of(context).pop();
+                            }
+                          },
+                        ),
+                      ],
+                    );
+                  });
                 },
               );
             },
